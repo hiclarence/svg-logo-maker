@@ -7,6 +7,7 @@ function writeToFile(fileName, data) {
     if (err) {
       console.error(err);
     }
+    console.log('sucess!')
   });
 }
 
@@ -35,5 +36,5 @@ inquirer
     },
 ])
 .then((data) => {
-  writeToFile(`sample${data.shape}.svg`,data)
+  writeToFile(`sample${data.shape}.svg`,data);
 });

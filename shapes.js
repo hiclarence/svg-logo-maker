@@ -1,71 +1,46 @@
 // this file is used to export shape classses
 function Shape(letters, textColor, shapeColor) {
-    this.canvas = `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">`
     this.letters = letters;
-    this.textColor = function(textColor) {
-        return `fill = ${textColor}`; 
-    }
-    // this.setColor = function(shapeColor) {
-    //     return `fill = ${shapeColor}`;
-    // }
-    this.setColor = shapeColor;
-}
+    this.textColor = textColor;
+    this.shapeColor = shapeColor;
 
-function Square(letters,textColor,shapeColor) {
-    Shape.call(this, letters, textColor, shapeColor);
     this.render = function () {
-        return `<rect x="95" y="40" width="100" height="100" ${Shape.setColor(shapeColor)}/>`; 
-    }
-    this.text = function () {
-        return `<text x="120" y="110" font-size="40" text-anchor="middle" ${Shape.textColor(textColor)}>${letters}</text>`
-    }
+        return `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg"><${this.shapeCoord} fill="${this.shapeColor}"/><${this.textCoord} fill="${this.textColor}">${this.letters}</text></svg>`;
+    };
+}
+    
+function Square(letters,textColor,shapeColor, shapeCoord, textCoord) {
+    Shape.call(this, letters, textColor, shapeColor);
+    this.shapeCoord = `rect x="95" y="40" width="100" height="100"`; 
+    this.textCoord = `text x="90" y="110" font-size="60"`; 
 }
  
-function Circle(letters,textColor,shapeColor) {
+function Circle(letters,textColor,shapeColor, shapeCoord, textCoord) {
     Shape.call(this, letters, textColor, shapeColor); 
-    this.render = function () {
-        return `<circle cx="150" cy="100" r="80" ${Shape.setColor(shapeColor)} />`; 
-    }
-    this.text = function () {
-        return `<text x="150" y="125" font-size="60" text-anchor="middle" ${Shape.textColor(textColor)}>${letters}</text>`
-    }
+    this.shapeCoord = `circle cx="150" cy="100" r="80"`; 
+    this.textCoord = `text x="100" y="125" font-size="60"`;
 }
 
-function Triangle(letters,textColor,shapeColor) {
+function Triangle(letters,textColor,shapeColor, shapeCoord, textCoord) {
     Shape.call(this, letters, textColor, shapeColor);
-    this.render = function () {
-        return `<polygon points="140, 8 255, 260 50, 200 60" fill=${Shape.setColor}/>`; 
-    }
-    this.text = function () {
-        return `<text x="130" y="90" font-size="20" text-anchor="middle" ${Shape.textColor(textColor)}>${letters}</text>`
-    }
+    console.log("inside the triangle class")
+    this.shapeCoord = `<polygon points="140, 8 255, 260 50, 200 60"`; 
+    this.textCoord = `text x="100" y="150" font-size="40"`;
 }
 
 
 function draw(data) {
     if (data.shape == 'triangle') {
-        const shape = new Triangle(data.letters, data.textColor, data.shapeColor); 
-        return `
-        ${shape.canvas}
-        ${shape.render()};
-        </svg> 
-        `
+        const newShape = new Triangle(data.letters, data.textColor, data.shapeColor); 
+        return newShape.render();
     }
     if (data.shape == 'circle') {
-        const shape = new Circle(data.letters, data.textColor, data.shapeColor); 
-        return `
-        ${shape.canvas};
-        ${shape.render()};
-        </svg> 
-        ` 
+        const newShape = new Circle(data.letters, data.textColor, data.shapeColor); 
+        return newShape.render();
     }
     if (data.shape == 'square') {
-        const shape = new Square(data.letters, data.textColor, data.shapeColor); 
-        return `
-        ${shape.canvas};
-        ${shape.render()};
-        </svg> 
-        ` 
+        const newShape = new Square(data.letters, data.textColor, data.shapeColor); 
+        return newShape.render();
     }
 }
 

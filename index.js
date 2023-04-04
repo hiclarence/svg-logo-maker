@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const shapes = require('./shapes');
+const shapes = require('./lib/shapes');
 const fs = require('fs');
 
 function writeToFile(fileName, data) {
@@ -7,7 +7,7 @@ function writeToFile(fileName, data) {
     if (err) {
       console.error(err);
     }
-    console.log('sucess!')
+    console.log('Generated logo.svg!')
   });
 }
 
@@ -36,5 +36,5 @@ inquirer
     },
 ])
 .then((data) => {
-  writeToFile(`sample${data.shape}.svg`,data);
+  writeToFile(`logo.svg`,data);
 });
